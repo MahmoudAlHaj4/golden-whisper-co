@@ -21,14 +21,13 @@ const Navigation = () => {
     { name: "Home", path: "/" },
     { name: "Shop", path: "/shop" },
     { name: "About", path: "/about" },
+    { name: "FAQ", path: "/faq" },
     { name: "Contact", path: "/contact" },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-elegant" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-sm`}
     >
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
@@ -54,12 +53,11 @@ const Navigation = () => {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-3">
-            <Button className="hidden md:flex bg-gold hover:bg-gold-dark text-white">
-              Book
-            </Button>
-            <Button className="hidden md:flex bg-gold hover:bg-gold-dark text-white">
-              Appoint
-            </Button>
+            <Link to="/book-appointment">
+              <Button className="hidden md:flex bg-gold hover:bg-gold-dark text-white">
+                Book Appointment
+              </Button>
+            </Link>
 
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -83,12 +81,11 @@ const Navigation = () => {
                     </Link>
                   ))}
                   <div className="flex flex-col gap-3 pt-4 border-t">
-                    <Button className="bg-gold hover:bg-gold-dark text-white w-full">
-                      Book
-                    </Button>
-                    <Button className="bg-gold hover:bg-gold-dark text-white w-full">
-                      Appoint
-                    </Button>
+                    <Link to="/book-appointment" className="w-full" onClick={() => setIsOpen(false)}>
+                      <Button className="bg-gold hover:bg-gold-dark text-white w-full">
+                        Book Appointment
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </SheetContent>
