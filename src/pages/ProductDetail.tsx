@@ -8,11 +8,35 @@ import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
 import product4 from "@/assets/product-4.jpg";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Footer from "@/components/Footer";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation();
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        setIsScrolled(window.scrollY > 20);
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+  
+    const navLinks = [
+      { name: "Home", path: "/" },
+      { name: "Collection", path: "/shop" },
+      { name: "About", path: "/about" },
+      // { name: "FAQ", path: "/faq" },
+      { name: "Contact", path: "/contact" },
+    ];
 
   const product = {
     id: 1,
@@ -35,6 +59,80 @@ const ProductDetail = () => {
 
   return (
     <div className="min-h-screen pt-24">
+       <header
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 " ${
+              isScrolled ? "bg-white shadow-md" : "bg-transparent"
+            }`}
+          >
+            <nav className="container mx-auto px-8 py-4 ">
+              <div className="flex items-center justify-between">
+                {/* Logo */}
+                <Link to="/" className={`text-3xl font-heading font-semibold tracking-wide transition-colors ${
+                  isScrolled ? "text-black hover:text-primary" : "text-black hover:text-primary"
+                }`}>
+                  Lumière
+                </Link>
+      
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center gap-8">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      to={link.path}
+                      className={`text-lg font-medium font-heading tracking-wide transition-all relative hover:after:w-full after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:bg-current after:transition-all after:duration-300 ${
+                        location.pathname === link.path 
+                          ? `after:w-full ${isScrolled ? "text-primary" : "text-white"}` 
+                          : `after:w-0 ${isScrolled ? "text-black" : "black-white"}`
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+      
+                {/* Action Buttons */}
+                <div className="flex items-center gap-3">
+                  <Link to="/book-appointment">
+                    <Button className="hidden md:flex bg-gold hover:bg-gold-dark text-white font-heading">
+                      Book Appointment
+                    </Button>
+                  </Link>
+      
+                  {/* Mobile Menu */}
+                  <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                    <SheetTrigger asChild className="md:hidden">
+                      <Button variant="ghost" size="icon" className={isScrolled ? "text-black" : "text-white"}>
+                        <Menu className="h-5 w-5" />
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent side="right" className="w-[300px]">
+                      <div className="flex flex-col gap-6 mt-8">
+                        {navLinks.map((link) => (
+                          <Link
+                            key={link.name}
+                            to={link.path}
+                            onClick={() => setIsOpen(false)}
+                            className={`text-lg font-medium transition-colors hover:text-primary ${
+                              location.pathname === link.path ? "text-primary" : "text-foreground"
+                            }`}
+                          >
+                            {link.name}
+                          </Link>
+                        ))}
+                        <div className="flex flex-col gap-3 pt-4 border-t">
+                          <Link to="/book-appointment" className="w-full" onClick={() => setIsOpen(false)}>
+                            <Button className="bg-gold hover:bg-gold-dark text-white w-full">
+                              Book Appointment
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </SheetContent>
+                  </Sheet>
+                </div>
+              </div>
+            </nav>
+          </header>
       <div className="container mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <div className="text-sm text-muted-foreground mb-8 flex gap-2">
@@ -59,19 +157,7 @@ const ProductDetail = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="grid grid-cols-4 gap-4">
-              {product.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`aspect-square overflow-hidden rounded-lg border-2 transition-all ${
-                    selectedImage === index ? "border-primary" : "border-transparent"
-                  }`}
-                >
-                  <img src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
+           
           </div>
 
           {/* Product Info */}
@@ -101,7 +187,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Quantity Selector */}
-            <div className="flex items-center gap-4 mb-6">
+            {/* <div className="flex items-center gap-4 mb-6">
               <span className="text-sm font-medium">Quantity:</span>
               <div className="flex items-center border rounded-md">
                 <Button
@@ -116,23 +202,21 @@ const ProductDetail = () => {
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
-            </div>
+            </div> */}
 
             {/* Action Buttons */}
             <div className="flex gap-4 mb-8">
               <Button size="lg" className="flex-1">
-                Add to Cart
+                Book an Appointment
               </Button>
-              <Button variant="outline" size="icon">
-                <Heart className="h-5 w-5" />
-              </Button>
+              
               <Button variant="outline" size="icon">
                 <Share2 className="h-5 w-5" />
               </Button>
             </div>
 
             {/* Features */}
-            <div className="grid grid-cols-3 gap-4 py-6 border-t">
+            {/* <div className="grid grid-cols-3 gap-4 py-6 border-t">
               <div className="text-center">
                 <Truck className="h-6 w-6 mx-auto mb-2 text-primary" />
                 <p className="text-xs text-muted-foreground">Free Shipping</p>
@@ -145,7 +229,7 @@ const ProductDetail = () => {
                 <RotateCcw className="h-6 w-6 mx-auto mb-2 text-primary" />
                 <p className="text-xs text-muted-foreground">30-Day Returns</p>
               </div>
-            </div>
+            </div> */}
 
             {/* Accordion Details */}
             <Accordion type="single" collapsible className="w-full">
@@ -199,6 +283,7 @@ const ProductDetail = () => {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 };

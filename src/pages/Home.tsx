@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Star } from "lucide-react";
-import heroHome from "@/assets/hero-home.jpg";
+import { ArrowRight, Star, Truck, Shield, Gem, Hammer, Leaf, Sparkles } from "lucide-react";
+import heroHome from "@/assets/hero-jewelry.jpg";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
 import product4 from "@/assets/product-4.jpg";
 import product5 from "@/assets/product-5.jpg";
 import product6 from "@/assets/product-6.jpg";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 const Home = () => {
   const collections = [
@@ -29,12 +31,51 @@ const Home = () => {
       text: "Absolutely stunning jewelry. The quality exceeds all expectations. My new favorite collection.",
       rating: 5,
     },
+    {
+      name: "Michael Chen",
+      text: "I purchased an engagement ring from Lumière and it was perfect. The attention to detail and customer service were exceptional.",
+      rating: 5,
+    },
+  ];
+
+  const features = [
+    { 
+      title: "Free Delivery", 
+      desc: "Complimentary delivery on all orders worldwide",
+      icon: Truck
+    },
+    { 
+      title: "Lifetime Warranty", 
+      desc: "Every piece comes with our lifetime craftsmanship guarantee",
+      icon: Shield
+    },
+    { 
+      title: "Certified Diamonds", 
+      desc: "GIA certified diamonds with full documentation",
+      icon: Gem
+    },
+    { 
+      title: "Expert Craftsmanship", 
+      desc: "Handcrafted by master artisans with 20+ years experience",
+      icon: Hammer
+    },
+    { 
+      title: "Ethically Sourced", 
+      desc: "Responsibly sourced materials from verified suppliers",
+      icon: Leaf
+    },
+    { 
+      title: "Custom Design", 
+      desc: "Bespoke jewelry design service tailored to your vision",
+      icon: Sparkles
+    },
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+        <Navigation />
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroHome})` }}
@@ -170,22 +211,18 @@ const Home = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { title: "Free Shipping", desc: "Complimentary shipping on all orders worldwide" },
-              { title: "Lifetime Warranty", desc: "Every piece comes with our lifetime craftsmanship guarantee" },
-              { title: "Certified Diamonds", desc: "GIA certified diamonds with full documentation" },
-              { title: "Expert Craftsmanship", desc: "Handcrafted by master artisans with 20+ years experience" },
-              { title: "Ethically Sourced", desc: "Responsibly sourced materials from verified suppliers" },
-              { title: "Custom Design", desc: "Bespoke jewelry design service tailored to your vision" },
-            ].map((item, index) => (
-              <Card key={index} className="p-8 text-center border-none shadow-elegant hover-lift">
-                <div className="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4">
-                  <div className="w-8 h-8 rounded-full bg-gold"></div>
-                </div>
-                <h3 className="text-xl font-heading mb-3">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </Card>
-            ))}
+            {features.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <Card key={index} className="p-8 text-center border-none shadow-elegant hover-lift">
+                  <div className="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-8 h-8 text-gold" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-xl font-heading mb-3">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -231,7 +268,7 @@ const Home = () => {
           <h2 className="text-4xl font-heading font-light mb-4">What Our Clients Say</h2>
           <p className="text-muted-foreground">Hear from those who've experienced Lumière elegance</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <Card key={index} className="p-8 shadow-elegant border-none">
               <div className="flex gap-1 mb-4">
@@ -265,6 +302,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

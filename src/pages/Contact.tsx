@@ -4,15 +4,32 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import Navigation from "@/components/Navigation";
+import ContactImage from '@/assets/contact-hero.jpg'
+import Footer from "@/components/Footer";
 
 const Contact = () => {
   return (
     <div className="min-h-screen">
+      <Navigation />
+
       {/* Hero Section */}
-      <section className="relative h-[40vh] flex items-center justify-center bg-secondary/30">
-        <div className="text-center px-4">
-          <h1 className="text-5xl md:text-6xl font-heading font-light mb-4 tracking-wide">Get In Touch</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <img
+          src={ContactImage}
+          alt="Jewelry showroom"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+
+        {/* Hero Text */}
+        <div className="relative text-center text-white px-4">
+          <h1 className="text-5xl md:text-6xl font-heading font-light mb-4 tracking-wide">
+            Get In Touch
+          </h1>
+          <p className="text-lg text-gray-200 max-w-2xl mx-auto">
             We'd love to hear from you. Our team is here to answer your questions.
           </p>
         </div>
@@ -41,7 +58,7 @@ const Contact = () => {
               <p className="text-sm text-muted-foreground">
                 +1 (555) 123-4567
                 <br />
-                Mon-Sat: 10:00 AM - 7:00 PM
+                Mon–Sat: 10:00 AM – 7:00 PM
               </p>
             </Card>
 
@@ -59,8 +76,8 @@ const Contact = () => {
               <Clock className="h-6 w-6 text-primary mb-4" />
               <h3 className="font-heading text-lg mb-2">Business Hours</h3>
               <div className="text-sm text-muted-foreground space-y-1">
-                <p>Monday - Friday: 10:00 AM - 7:00 PM</p>
-                <p>Saturday: 11:00 AM - 6:00 PM</p>
+                <p>Monday – Friday: 10:00 AM – 7:00 PM</p>
+                <p>Saturday: 11:00 AM – 6:00 PM</p>
                 <p>Sunday: Closed</p>
               </div>
             </Card>
@@ -117,12 +134,13 @@ const Contact = () => {
       </section>
 
       {/* Map Section (Placeholder) */}
-      <section className="h-[400px] bg-secondary/30 flex items-center justify-center">
+      <section className="h-[400px] bg-secondary/30 flex items-center justify-center ">
         <div className="text-center">
           <MapPin className="h-12 w-12 mx-auto mb-4 text-primary" />
           <p className="text-muted-foreground">Map integration would appear here</p>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

@@ -11,6 +11,9 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import Navigation from "@/components/Navigation";
+import bookImage from '@/assets/booking-hero-new.jpg'
+import Footer from "@/components/Footer";
 
 const BookAppointment = () => {
   const [date, setDate] = useState<Date>();
@@ -47,19 +50,29 @@ const BookAppointment = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-secondary/20 to-background py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-heading font-light mb-4">Book an Appointment</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+    <div className="min-h-screen">
+      <Navigation />
+
+      {/* Hero Section with Background Image */}
+      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+        <img
+          src={bookImage}
+          alt="Jewelry consultation"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative text-center text-white px-4">
+          <h1 className="text-5xl md:text-6xl font-heading font-light mb-4 tracking-wide">
+            Book an Appointment
+          </h1>
+          <p className="text-lg text-gray-200 max-w-2xl mx-auto">
             Schedule a personalized consultation with our jewelry experts. Let us help you find or create the perfect piece.
           </p>
         </div>
       </section>
 
-      {/* Appointment Form */}
-      <section className="container mx-auto px-4 py-12">
+      {/* Appointment Form Section */}
+      <section className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Information Cards */}
           <div className="lg:col-span-1 space-y-6">
@@ -98,7 +111,7 @@ const BookAppointment = () => {
                 </p>
                 <p className="text-muted-foreground">
                   <strong className="text-foreground">Hours:</strong><br />
-                  Mon-Sat: 10:00 AM - 6:00 PM<br />
+                  Mon–Sat: 10:00 AM – 6:00 PM<br />
                   Sunday: Closed
                 </p>
               </div>
@@ -228,6 +241,7 @@ const BookAppointment = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

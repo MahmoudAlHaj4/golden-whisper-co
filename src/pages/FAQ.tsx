@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 const FAQ = () => {
   const faqCategories = [
@@ -125,6 +127,7 @@ const FAQ = () => {
   return (
     <div className="min-h-screen pt-24 pb-20">
       {/* Hero Section */}
+      <Navigation />
       <section className="bg-gradient-to-b from-secondary/20 to-background py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-heading font-light mb-4">
@@ -188,6 +191,7 @@ const FAQ = () => {
           </div>
         </Card>
       </section>
+      <Footer />
     </div>
   );
 };

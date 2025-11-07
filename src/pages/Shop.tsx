@@ -5,13 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import heroShop from "@/assets/hero-shop.jpg";
+import heroShop from "@/assets/collections-hero.jpg";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
 import product4 from "@/assets/product-4.jpg";
 import product5 from "@/assets/product-5.jpg";
 import product6 from "@/assets/product-6.jpg";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 5000]);
@@ -29,6 +31,7 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen">
+      <Navigation />
       {/* Hero Section */}
       <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
         <div
@@ -136,6 +139,7 @@ const Shop = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

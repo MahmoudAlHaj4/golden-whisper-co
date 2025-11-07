@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -13,8 +13,20 @@ import Contact from "./pages/Contact";
 import BookAppointment from "./pages/BookAppointment";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
+import { useEffect } from "react";
+import Login from "./pages/loginpage";
+import AdminDashboard from "./pages/admin";
 
 const queryClient = new QueryClient();
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -23,8 +35,9 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <div className="flex flex-col min-h-screen">
-          <Navigation />
+          
           <main className="flex-1">
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
@@ -34,9 +47,12 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/book-appointment" element={<BookAppointment />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<AdminDashboard />} />
             </Routes>
+         
           </main>
-          <Footer />
+
         </div>
       </BrowserRouter>
     </TooltipProvider>

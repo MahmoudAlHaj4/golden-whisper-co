@@ -1,6 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Sparkles, Heart, Leaf, Award } from "lucide-react";
 import heroAbout from "@/assets/hero-about.jpg";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 const About = () => {
   const values = [
@@ -28,6 +30,7 @@ const About = () => {
 
   return (
     <div className="min-h-screen">
+      <Navigation />
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div
@@ -132,6 +135,7 @@ const About = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

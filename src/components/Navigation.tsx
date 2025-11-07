@@ -19,20 +19,24 @@ const Navigation = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Shop", path: "/shop" },
+    { name: "Collection", path: "/shop" },
     { name: "About", path: "/about" },
-    { name: "FAQ", path: "/faq" },
+    // { name: "FAQ", path: "/faq" },
     { name: "Contact", path: "/contact" },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-sm`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 " ${
+        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+      }`}
     >
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-8 py-4 ">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-heading font-semibold tracking-wide text-foreground hover:text-primary transition-colors">
+          <Link to="/" className={`text-3xl font-heading font-semibold tracking-wide transition-colors ${
+            isScrolled ? "text-black hover:text-primary" : "text-white hover:text-primary"
+          }`}>
             Lumière
           </Link>
 
@@ -42,8 +46,10 @@ const Navigation = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-sm font-medium tracking-wide transition-colors hover:text-primary ${
-                  location.pathname === link.path ? "text-primary" : "text-foreground"
+                className={`text-lg font-medium font-heading tracking-wide transition-all relative hover:after:w-full after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:bg-current after:transition-all after:duration-300 ${
+                  location.pathname === link.path 
+                    ? `after:w-full ${isScrolled ? "text-primary" : "text-white"}` 
+                    : `after:w-0 ${isScrolled ? "text-black" : "text-white"}`
                 }`}
               >
                 {link.name}
@@ -54,7 +60,7 @@ const Navigation = () => {
           {/* Action Buttons */}
           <div className="flex items-center gap-3">
             <Link to="/book-appointment">
-              <Button className="hidden md:flex bg-gold hover:bg-gold-dark text-white">
+              <Button className="hidden md:flex bg-gold hover:bg-gold-dark text-white font-heading">
                 Book Appointment
               </Button>
             </Link>
@@ -62,7 +68,7 @@ const Navigation = () => {
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className={isScrolled ? "text-black" : "text-white"}>
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
