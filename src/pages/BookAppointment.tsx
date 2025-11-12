@@ -178,7 +178,7 @@ const BookAppointment = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label>Preferred Date *</Label>
-                    <Popover>
+                    <Popover modal={false}>
                       <PopoverTrigger asChild>
                         <Button
                           variant="outline"
@@ -191,7 +191,7 @@ const BookAppointment = () => {
                           {date ? format(date, "PPP") : <span>Pick a date</span>}
                         </Button>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0">
+                      <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
                           mode="single"
                           selected={date}

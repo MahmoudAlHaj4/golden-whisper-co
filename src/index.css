@@ -62,10 +62,35 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-body;
+    scrollbar-gutter: stable;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--gold));
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--gold-dark));
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--gold)) hsl(var(--muted));
   }
 }
 
