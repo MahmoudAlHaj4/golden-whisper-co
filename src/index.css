@@ -60,9 +60,13 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    overflow-y: scroll; /* keep scrollbar always visible */
+  }
+
   body {
     @apply bg-background text-foreground font-body;
-    scrollbar-gutter: stable;
+    scrollbar-gutter: stable both-edges;
   }
 
   h1, h2, h3, h4, h5, h6 {
